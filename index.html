@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Baby Skin – Hidratação Noturna Inteligente</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{ --bg:#0b0511; --ink:#ffffff; --muted:#efd7e6; --pink:#E1306C; --purple:#833AB4; --stroke:rgba(255,255,255,.12); }
+    *{box-sizing:border-box}
+    html,body{margin:0;color:var(--ink);background:
+      radial-gradient(1200px 650px at 15% 90%, rgba(252,175,69,.12), transparent 62%),
+      radial-gradient(1000px 560px at 88% -12%, rgba(131,58,180,.22), transparent 64%),
+      var(--bg);
+      font-family:Manrope,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
+    a{color:inherit;text-decoration:none}
+
+    /* ===== Layout & espaçamentos ===== */
+    .wrap{max-width:1060px;margin:0 auto;padding:22px}
+    header{display:flex;align-items:center;justify-content:center;padding:10px 0}
+    .section{padding:clamp(56px,7vw,92px) 0}
+    .center{text-align:center}
+    h1,h2,h3,p{margin:0}
+    .h2{font-family:"Playfair Display",serif;font-weight:800;font-size:clamp(22px,3vw,30px);margin-bottom:14px}
+    .note{color:var(--muted);font-size:15px;line-height:1.7}
+
+    /* ===== Marca ===== */
+    .brand{font-family:"Playfair Display",serif;font-weight:700;font-size:22px;letter-spacing:.4px}
+    .brand span{color:var(--pink)}
+
+    /* ===== Hero ===== */
+    .kicker{display:inline-flex;gap:10px;align-items:center;padding:8px 14px;border-radius:999px;background:rgba(131,58,180,.22);color:#ffe9ff;font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.9px}
+    h1{font-family:"Playfair Display",serif;font-weight:800;line-height:1.04;font-size:clamp(32px,6vw,62px);max-width:860px;margin:12px auto 10px}
+    .sub{color:var(--muted);font-size:18px;line-height:1.75;max-width:820px;margin:0 auto clamp(18px,3vw,26px)}
+
+    /* Banners (frases) */
+    .hero-banners{position:relative;background:linear-gradient(180deg,rgba(131,58,180,.22),rgba(225,48,108,.18));border:1px solid var(--stroke);border-radius:20px;padding:26px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.35);margin:16px 0}
+    .hero-banner{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transform:translateY(8px);transition:opacity .8s ease,transform .8s ease}
+    .hero-banner.active{opacity:1;transform:translateY(0)}
+    .hero-text{font-weight:800;font-size:clamp(18px,3.4vw,26px);letter-spacing:.2px}
+    .dots{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:8px}
+    .dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.28);transition:transform .25s,background .25s}
+    .dot.active{background:linear-gradient(135deg,var(--purple),var(--pink));transform:scale(1.2)}
+
+    /* Ribbon */
+    .ribbon{margin:16px 0;background:rgba(255,255,255,.06);border:1px solid var(--stroke);border-radius:16px;overflow:hidden}
+    .ribbon-track{display:flex;gap:22px;align-items:center;white-space:nowrap;animation:scroll 28s linear infinite}
+    .chip{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.07);font-weight:700}
+    .chip i{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--pink));display:inline-block}
+    @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+    /* Imagens */
+    .image-slot{width:100%;aspect-ratio:16/9;border:1px dashed var(--stroke);border-radius:22px;overflow:hidden;background:linear-gradient(180deg,rgba(35,17,51,.55),rgba(35,17,51,.25));box-shadow:0 30px 90px rgba(0,0,0,.38);margin:18px 0}
+    .image-slot img{width:100%;height:100%;object-fit:cover;display:block}
+
+    /* Painéis, grids, cards */
+    .panel{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:26px;margin-bottom:clamp(28px,4vw,44px)}
+    .panel.dark{background:linear-gradient(180deg,rgba(35,17,51,.55),rgba(35,17,51,.25));border-color:var(--stroke)}
+    .grid-3{display:grid;gap:clamp(16px,3vw,26px);grid-template-columns:repeat(3,1fr)}
+    .grid-2{display:grid;gap:clamp(16px,3vw,26px);grid-template-columns:repeat(2,1fr)}
+    .card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:22px;transition:transform .35s,border-color .35s}
+    .card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.22)}
+
+    /* Ingredientes */
+    .ingredients{display:grid;gap:clamp(14px,3vw,22px);grid-template-columns:repeat(3,1fr)}
+    .ing{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:18px;text-align:left;transition:transform .3s ease,border-color .3s}
+    .ing:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.22)}
+    .ing .name{font-weight:900;margin-bottom:6px}
+    .ing .desc{color:#efd7e6;font-size:14px;line-height:1.7}
+
+    /* Planos */
+    .plans{display:grid;gap:clamp(14px,3vw,22px);grid-template-columns:repeat(3,1fr)}
+    .plan{background:linear-gradient(180deg,rgba(35,17,51,.55),rgba(35,17,51,.25));border:1px solid var(--stroke);border-radius:22px;padding:22px;text-align:center;transition:transform .35s,box-shadow .35s}
+    .plan:hover{transform:translateY(-6px);box-shadow:0 22px 80px rgba(131,58,180,.25)}
+    .plan.best{border-color:rgba(225,48,108,.5)}
+    .title{font-weight:900;letter-spacing:.3px;margin-bottom:4px}
+    .bottles{font-size:13px;color:#efd7e6}
+    .save{display:inline-block;background:rgba(225,48,108,.18);border:1px solid rgba(225,48,108,.45);color:#ffe9f3;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:800;margin-bottom:6px}
+    .price{display:grid;gap:6px;justify-items:center;margin:10px 0}
+    .price-old{color:rgba(255,255,255,.6);text-decoration:line-through;font-weight:700}
+    .price-install{font-size:28px;font-weight:900}
+    .price-cash{font-size:14px;color:#ffe2ef}
+
+    /* === BOTÕES (fix) === */
+    .btn, .buy{
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      color: #fff;
+      font-weight: 900;
+      padding: 10px 18px;
+      border-radius: 999px;
+      box-shadow: 0 6px 18px rgba(225,48,108,0.35);
+      transition: transform .18s ease, box-shadow .25s ease;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+      font-size: 14px;
+      line-height: 1.2;           /* previne crescimento vertical */
+      white-space: nowrap;        /* evita quebra dentro do botão */
+      display: inline-block;
+      text-align: center;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      animation: pulseGlowBtn 3s ease-in-out infinite;
+    }
+    .btn:hover, .buy:hover { transform: translateY(-1px) scale(1.02); box-shadow: 0 10px 28px rgba(225,48,108,0.5); }
+    @keyframes pulseGlowBtn{
+      0%,100%{ box-shadow:0 0 0 0 rgba(225,48,108,.45), 0 6px 18px rgba(225,48,108,.35) }
+      50%{ box-shadow:0 0 0 8px rgba(225,48,108,0), 0 10px 28px rgba(225,48,108,.55) }
+    }
+    @media (prefers-reduced-motion: reduce){ .btn, .buy { animation: none; } }
+
+    /* Telegram */
+    .btn-telegram{
+      background: linear-gradient(135deg,#229ED9,#1c89bd);
+      color:#fff;
+      font-weight:900;
+      padding:10px 18px; /* igual aos demais botões */
+      border-radius:999px;
+      box-shadow:0 6px 18px rgba(34,158,217,.3);
+      transition:transform .18s ease, box-shadow .25s ease;
+      text-transform:uppercase;
+      letter-spacing:.4px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:14px;
+      line-height:1.2;
+      white-space:nowrap;
+    }
+    .btn-telegram:hover{ transform: translateY(-1px) scale(1.02); box-shadow:0 10px 26px rgba(34,158,217,.45) }
+    .btn-telegram svg{ width:16px; height:16px; flex:0 0 16px; vertical-align:middle }
+    .btn-row{ display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:12px }
+
+    /* CTA fixa */
+    .cta-bar{position:sticky;bottom:16px;background:rgba(12,5,17,.76);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:16px 18px;display:flex;align-items:center;justify-content:center;gap:12px;box-shadow:0 18px 52px rgba(0,0,0,.42)}
+
+    /* FAQ */
+    .faq{display:grid;gap:14px}
+    .faq-item{border:1px solid var(--stroke);border-radius:16px;background:rgba(255,255,255,.04);overflow:hidden}
+    .faq-q{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;cursor:pointer;font-weight:800}
+    .faq-q span{flex:1;text-align:left}
+    .faq-q svg{width:18px;height:18px;transition:transform .25s ease}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease;color:var(--muted);padding:0 18px}
+    .faq-item.open .faq-a{max-height:260px;padding:0 18px 16px}
+    .faq-item.open .faq-q svg{transform:rotate(45deg)}
+
+    /* Pagamentos/rodapé */
+    footer{color:#efd7e6;font-size:13px;padding:40px 0 80px}
+    .payments{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;align-items:center}
+    .flag{display:inline-flex;align-items:center;justify-content:center;padding:6px 10px;border-radius:10px;border:1px solid rgba(255,255,255,.14);font-size:12px;font-weight:800;letter-spacing:.3px;background:rgba(255,255,255,.06)}
+    .flag.pix{background:linear-gradient(135deg,#36c996,#25a57e);color:#052d22}
+    .quality{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06)}
+    .quality .qmark{width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--purple));display:grid;place-items:center;font-weight:900}
+
+    /* Reveal */
+    .fade-up{opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .8s ease}
+    .in-view{opacity:1;transform:translateY(0)}
+
+    /* Responsivo */
+    @media (max-width:980px){
+      .wrap{padding:18px}
+      .grid-3,.plans,.ingredients,.grid-2{grid-template-columns:1fr}
+      .cta-bar{flex-direction:column}
+    }
+    @media (max-width:520px){ .btn-row a{ width:100%; max-width:420px } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="fade-up"><div class="brand">BABY <span>SKIN</span></div></header>
+
+    <!-- HERO -->
+    <section class="section center fade-up">
+      <div class="kicker">Ritual Noturno + Água</div>
+      <h1>Sua pele não tá fraca.</h1>
+      <p class="sub">Ela tá <b>inflamada</b> e <b>desidratada por dentro</b> — o que apaga o brilho, marca linhas finas e deixa a textura irregular. Nosso ritual simples (1 dose de <b>Baby Skin</b> + 1 copo de água antes de dormir) ajuda a <b>acalmar a inflamação</b> e <b>repor hidratação de dentro pra fora</b>.</p>
+
+      <div class="hero-banners" id="heroBanners" aria-live="polite">
+        <div class="hero-banner active"><div class="hero-text">💧 Hidratação profunda enquanto você dorme</div></div>
+        <div class="hero-banner"><div class="hero-text">✨ Pele mais firme e viçosa em 30–60 dias de uso</div></div>
+        <div class="hero-banner"><div class="hero-text">🌙 Ritual simples: 1 dose + 1 copo de água antes de dormir</div></div>
+        <div class="hero-banner"><div class="hero-text">🛡️ Antioxidantes que acalmam a inflamação invisível</div></div>
+        <div class="dots" id="dots" aria-hidden="true"></div>
+      </div>
+
+      <div class="ribbon"><div class="ribbon-track">
+        <span class="chip"><i></i> Colágeno + Vitamina C</span>
+        <span class="chip"><i></i> Ácido Hialurônico</span>
+        <span class="chip"><i></i> Trans‑Resveratrol</span>
+        <span class="chip"><i></i> Zinco Bisglicinato</span>
+        <span class="chip"><i></i> Astaxantina</span>
+        <span class="chip"><i></i> Frete Grátis (lote atual)</span>
+        <span class="chip"><i></i> 7 dias garantia</span>
+        <span class="chip"><i></i> Colágeno + Vitamina C</span>
+        <span class="chip"><i></i> Ácido Hialurônico</span>
+        <span class="chip"><i></i> Trans‑Resveratrol</span>
+        <span class="chip"><i></i> Zinco Bisglicinato</span>
+        <span class="chip"><i></i> Astaxantina</span>
+        <span class="chip"><i></i> Frete Grátis (lote atual)</span>
+        <span class="chip"><i></i> 7 dias garantia</span>
+      </div></div>
+
+      <div class="image-slot" aria-label="Imagem principal"><!-- <img src="assets/baby-skin-hero.jpg" alt="Frascos Baby Skin"/> --></div>
+
+      <div class="btn-row">
+        <a class="btn" href="#checkout">Começar hoje mesmo</a>
+        <a class="btn-telegram" href="https://t.me/SEU_CANAL" target="_blank" rel="noopener" aria-label="Entrar na comunidade no Telegram (dicas diárias)">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9.04 12.52l-.23 3.34c.33 0 .47-.15.64-.33l1.54-1.48 3.19 2.34c.58.32 1 .15 1.16-.53l2.11-9.91v-.01c.19-.9-.33-1.25-.9-1.03L3.6 8.78c-.87.34-.86.83-.15 1.05l3.86 1.2 8.98-5.66c.42-.26.8-.12.49.14l-7.83 6.99z" fill="#fff"/></svg>
+          Telegram (dicas diárias)
+        </a>
+      </div>
+      <p class="note" style="margin-top:10px">Resultados melhores com uso contínuo por 30–60 dias.</p>
+    </section>
+
+    <!-- Galeria / Depoimentos -->
+    <section class="section center fade-up">
+      <div class="panel">
+        <div class="grid-2">
+          <div class="image-slot" aria-label="Galeria 1"><!-- <img src="assets/galeria-1.jpg" alt="Resultado 1"/> --></div>
+          <div class="image-slot" aria-label="Galeria 2"><!-- <img src="assets/galeria-2.jpg" alt="Resultado 2"/> --></div>
+        </div>
+        <div class="grid-3">
+          <div class="image-slot" aria-label="Depoimento 1"></div>
+          <div class="image-slot" aria-label="Depoimento 2"></div>
+          <div class="image-slot" aria-label="Antes e Depois"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Explicação -->
+    <section class="section center fade-up">
+      <div class="panel dark">
+        <div class="grid-3">
+          <div class="card"><h3 class="h2">Inflamação invisível</h3><p class="note">Estresse, açúcar e sol mantêm a pele em <b>estado inflamatório</b>, reduzindo brilho e elasticidade.</p></div>
+          <div class="card"><h3 class="h2">Desidratação interna</h3><p class="note">Pouca água e sono ruim esvaziam o “estoque hídrico”. O <b>ácido hialurônico</b> ajuda a reter.</p></div>
+          <div class="card"><h3 class="h2">Ritual noturno</h3><p class="note">Durante o sono, a pele se repara. <b>Baby Skin</b> + água potencializam hidratação e defesa antioxidante.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ingredientes -->
+    <section class="section center fade-up">
+      <div class="panel dark">
+        <h2 class="h2">Ingredientes premium — como cada um age</h2>
+        <div class="ingredients">
+          <div class="ing"><div class="name">Peptídeos de Colágeno Hidrolisado</div><div class="desc">Fornecem blocos para a síntese de colágeno, ajudando na <b>firmeza</b> e <b>elasticidade</b>.</div></div>
+          <div class="ing"><div class="name">Vitamina C</div><div class="desc">Antioxidante que <b>potencializa o colágeno</b> e contribui para tom mais <b>uniforme</b>.</div></div>
+          <div class="ing"><div class="name">Ácido Hialurônico</div><div class="desc">Atrai e retém água nas camadas cutâneas, promovendo <b>viço</b> e <b>maciez</b>.</div></div>
+          <div class="ing"><div class="name">Trans-Resveratrol</div><div class="desc">Apoia as defesas antioxidantes, ajudando a <b>minimizar o estresse oxidativo</b>.</div></div>
+          <div class="ing"><div class="name">Zinco Bisglicinato</div><div class="desc">Auxilia no <b>equilíbrio da pele</b> e dá suporte a <b>cabelos e unhas</b>.</div></div>
+          <div class="ing"><div class="name">Astaxantina</div><div class="desc">Antioxidante potente associado a um <b>glow natural</b> e proteção contra radicais livres.</div></div>
+        </div>
+        <div class="btn-row"><a class="btn" href="#checkout">Garantir meu Baby Skin</a></div>
+      </div>
+    </section>
+
+    <!-- Comunidade Telegram -->
+    <section class="section center fade-up" id="telegram">
+      <div class="panel">
+        <h2 class="h2">Comunidade no Telegram</h2>
+        <p class="note">Dicas diárias para <b>cuidar da pele com métodos naturais</b>, <b>dormir melhor</b> e <b>intensificar os resultados</b> do seu tratamento com Baby Skin.</p>
+        <div class="btn-row">
+          <a class="btn-telegram" href="https://t.me/SEU_CANAL" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9.04 12.52l-.23 3.34c.33 0 .47-.15.64-.33l1.54-1.48 3.19 2.34c.58.32 1 .15 1.16-.53l2.11-9.91c.19-.9-.33-1.25-.9-1.03L3.6 8.78c-.87.34-.86.83-.15 1.05l3.86 1.2 8.98-5.66c.42-.26.8-.12.49.14l-7.83 6.99z" fill="#fff"/></svg>
+            Entrar no Telegram
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section center fade-up" id="faq">
+      <div class="panel dark">
+        <h2 class="h2">Perguntas Frequentes</h2>
+        <div class="faq" role="list">
+          <div class="faq-item" role="listitem">
+            <button class="faq-q" aria-expanded="false"><span>Em quanto tempo vejo resultados?</span><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M11 4h2v16h-2zM4 11h16v2H4z"/></svg></button>
+            <div class="faq-a"><p>Geralmente entre <b>30 e 60 dias</b> de uso contínuo, combinado com boa hidratação e sono.</p></div>
+          </div>
+          <div class="faq-item" role="listitem">
+            <button class="faq-q" aria-expanded="false"><span>Posso usar junto com minha rotina de skincare?</span><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M11 4h2v16h-2zM4 11h16v2H4z"/></svg></button>
+            <div class="faq-a"><p>Sim. O Baby Skin atua <b>de dentro para fora</b>, complementando séruns e cremes tópicos.</p></div>
+          </div>
+          <div class="faq-item" role="listitem">
+            <button class="faq-q" aria-expanded="false"><span>Tem contraindicações?</span><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M11 4h2v16h-2zM4 11h16v2H4z"/></svg></button>
+            <div class="faq-a"><p>Se estiver grávida, amamentando ou em tratamento, consulte seu profissional de saúde antes de usar.</p></div>
+          </div>
+          <div class="faq-item" role="listitem">
+            <button class="faq-q" aria-expanded="false"><span>Como potencializar os resultados?</span><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M11 4h2v16h-2zM4 11h16v2H4z"/></svg></button>
+            <div class="faq-a"><p>Mantenha o <b>ritual noturno</b>, <b>sono de qualidade</b> e <b>200–300ml de água</b> junto da dose. Participe da nossa <a href="#telegram">comunidade no Telegram</a> para dicas diárias.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Planos -->
+    <section id="checkout" class="section center fade-up">
+      <div class="panel">
+        <h2 class="h2">Escolha seu plano</h2>
+        <div class="plans">
+          <div class="plan" data-link="https://checkout-plano1.com">
+            <div class="title">1 Frasco</div>
+            <div class="bottles">30 dias de uso</div>
+            <div class="price">
+              <div class="price-old">R$ 159,90</div>
+              <div class="price-install">12x de R$ 9,90 <small>no cartão</small></div>
+              <div class="price-cash">ou R$ 99,90 à vista no Pix</div>
+            </div>
+            <p class="note">Para testar o ritual.</p>
+            <a class="btn buy" href="#" target="_blank" rel="noopener">Comprar agora</a>
+          </div>
+          <div class="plan best" data-link="https://checkout-plano2.com">
+            <div class="save">Mais vendido • Economize</div>
+            <div class="title">2 Frascos</div>
+            <div class="bottles">60 dias de uso</div>
+            <div class="price">
+              <div class="price-old">R$ 299,90</div>
+              <div class="price-install">12x de R$ 16,90 <small>no cartão</small></div>
+              <div class="price-cash">ou R$ 179,90 à vista no Pix</div>
+            </div>
+            <p class="note">Resultados consistentes + frete grátis.</p>
+            <a class="btn buy" href="#" target="_blank" rel="noopener">Comprar agora</a>
+          </div>
+          <div class="plan" data-link="https://checkout-plano3.com">
+            <div class="title">3 Frascos</div>
+            <div class="bottles">90 dias de uso</div>
+            <div class="price">
+              <div class="price-old">R$ 429,90</div>
+              <div class="price-install">12x de R$ 21,90 <small>no cartão</small></div>
+              <div class="price-cash">ou R$ 229,90 à vista no Pix</div>
+            </div>
+            <p class="note">Melhor custo por dose.</p>
+            <a class="btn buy" href="#" target="_blank" rel="noopener">Comprar agora</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="center fade-up">
+      <div class="panel dark" style="margin-bottom:18px">
+        <h2 class="h2">Modo de uso</h2>
+        <p class="note" style="margin-top:6px">Tome <b>12 gotas</b> diluídas em <b>200ml de água</b> <b>à noite</b>, antes de dormir. Use diariamente e mantenha boa hidratação ao longo do dia.</p>
+      </div>
+      <div class="panel dark" style="margin-bottom:18px">
+        <h2 class="h2">Sobre nós — SONO DA BELEZA</h2>
+        <p class="note" style="margin-top:6px">Acreditamos no poder do <b>sono reparador</b> aliado à <b>hidratação inteligente</b>. Desenvolvemos o Baby Skin para simplificar seu ritual noturno com ingredientes premium e uma experiência minimalista — porque beleza começa quando você descansa.</p>
+      </div>
+      <div style="margin-bottom:14px" class="payments">
+        <span class="flag">VISA</span>
+        <span class="flag">MASTERCARD</span>
+        <span class="flag">ELO</span>
+        <span class="flag">HIPERCARD</span>
+        <span class="flag">AMEX</span>
+        <span class="flag pix">PIX</span>
+        <span class="flag">BOLETO</span>
+      </div>
+      <div class="quality" style="margin-bottom:12px">
+        <span class="qmark">✓</span>
+        <strong>Selo de Qualidade Baby Skin</strong>
+        <span class="note">produção controlada, pagamento seguro e garantia de 7 dias</span>
+      </div>
+    </footer>
+
+    <div class="wrap">
+      <div class="cta-bar fade-up">
+        <div class="center">
+          <strong>Pronta pra acordar com a pele viçosa?</strong><br/>
+          <span class="note">1 dose + 1 copo de água antes de dormir.</span>
+        </div>
+        <div class="btn-row">
+          <a class="btn" href="#checkout">Quero meu Baby Skin</a>
+          <a class="btn-telegram" href="https://t.me/SEU_CANAL" target="_blank" rel="noopener">Telegram (dicas diárias)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Reveal on scroll
+    const reveal = () => { document.querySelectorAll('.fade-up').forEach(el => { const r = el.getBoundingClientRect(); if(r.top < innerHeight*0.9) el.classList.add('in-view'); }); };
+    addEventListener('load', reveal); addEventListener('scroll', reveal, {passive:true});
+
+    // Vincula links de compra
+    document.querySelectorAll('.plan').forEach(p=>{ const link=p.getAttribute('data-link'); const a=p.querySelector('.buy'); if(link&&a){ a.href=link; }});
+
+    // Hero banners
+    const banners=[...document.querySelectorAll('.hero-banner')];
+    const dotsWrap=document.getElementById('dots');
+    banners.forEach((_,i)=>{ const d=document.createElement('span'); d.className='dot'+(i===0?' active':''); dotsWrap.appendChild(d);});
+    const dots=[...dotsWrap.children]; let i=0;
+    const next=()=>{ banners[i].classList.remove('active'); dots[i].classList.remove('active'); i=(i+1)%banners.length; banners[i].classList.add('active'); dots[i].classList.add('active'); };
+    let t=setInterval(next,3000); const hb=document.getElementById('heroBanners');
+    hb.addEventListener('mouseenter',()=>clearInterval(t)); hb.addEventListener('mouseleave',()=>t=setInterval(next,3000));
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches){ clearInterval(t); }
+
+    // FAQ toggle
+    document.querySelectorAll('.faq-item .faq-q').forEach(btn=>{ btn.addEventListener('click',()=>{ const item=btn.parentElement; const open=item.classList.toggle('open'); btn.setAttribute('aria-expanded', open?'true':'false'); });});
+  </script>
+</body>
+</html>
